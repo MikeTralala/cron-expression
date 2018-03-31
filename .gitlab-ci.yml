@@ -37,6 +37,7 @@ publish:
     script:
         - mkdir -p ~/.ssh
         - echo "$DEPLOYMENT_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        - ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
         - chmod 700 ~/.ssh
         - chmod 600 ~/.ssh/id_rsa
         - git push git@github.com:MikeTralala/cron-expression.git $CI_COMMIT_REF_NAME
