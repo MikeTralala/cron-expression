@@ -9,17 +9,24 @@ stages:
   - test
   - publish
 
+before_script:
+    - wget https://composer.github.io/installer.sig -O - -q | tr -d '\n' > installer.sig
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php -r "if (hash_file('SHA384', 'composer-setup.php') === file_get_contents('installer.sig')) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
+
 build:
-  stage: build
-  script:
-    - composer install -o
-  tags:
-    - build
+    stage: build
+    script:
+        - composer install -o --dev
+    tags:
+        - build
 
 test:
-  stage: test
-  script:
-    - cp phpunit.xml.dist phpunit.xml
-    - vendor/bin/phpunit --coverage-text --colors=never --debug
-  tags:
-    - test
+    stage: test
+    script:
+        - cp phpunit.xml.dist phpunit.xml
+        - vendor/bin/phpunit --coverage-text --colors=never --debug
+    tags:
+        - test
