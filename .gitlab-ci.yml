@@ -21,7 +21,7 @@ before_script:
 build:
     stage: build
     script:
-        - composer install -o --dev
+        - composer.phar install -o --dev
     tags:
         - build
 
