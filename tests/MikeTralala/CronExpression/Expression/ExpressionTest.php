@@ -130,9 +130,7 @@ class ExpressionTest extends TestCase
         $this->assertInstanceOf(Range::class, $range);
         $this->assertEquals(range(0, 6), $range->getRange());
 
-
         $this->expectException(ExpressionException::class);
         $this->invokeMethod($expression, 'getAllowedRange', [5]);
     }
-
 }

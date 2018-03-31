@@ -34,6 +34,7 @@ class TimingTest extends TestCase
         $this->assertInstanceOf(Timing::class, $timing);
         $this->assertEquals('* * * * *', $timing->getExpression());
     }
+
     /**
      * @covers ::everyHour
      * @covers ::__construct

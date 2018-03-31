@@ -2,7 +2,8 @@
 
 
 $finder = PhpCsFixer\Finder::create()
-                           ->in(__DIR__ . '/src');
+                           ->notPath('vendor')
+                           ->in(__DIR__);
 
 return PhpCsFixer\Config::create()
                         ->setUsingCache(false)

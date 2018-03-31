@@ -133,5 +133,4 @@ class Expression
 
         throw ExpressionException::createInvalidPositionException($position);
     }
-
 }
