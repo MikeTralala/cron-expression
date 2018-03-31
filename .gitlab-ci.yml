@@ -13,9 +13,13 @@ build:
   stage: build
   script:
     - composer install -o
+  tags:
+    - build
 
 test:
   stage: test
   script:
     - cp phpunit.xml.dist phpunit.xml
     - vendor/bin/phpunit --coverage-text --colors=never --debug
+  tags:
+    - test
