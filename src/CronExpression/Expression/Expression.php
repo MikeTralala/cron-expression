@@ -117,11 +117,11 @@ class Expression
     public function isDue(\DateTime $dateTime)
     {
         $current = [
-            'minute' => (int) $dateTime->format('i'),
-            'hour' => (int) $dateTime->format('H'),
+            'minute'       => (int) $dateTime->format('i'),
+            'hour'         => (int) $dateTime->format('H'),
             'day_of_month' => (int) $dateTime->format('d'),
-            'month' => (int) $dateTime->format('m'),
-            'day_of_week' => (int) $dateTime->format('w'),
+            'month'        => (int) $dateTime->format('m'),
+            'day_of_week'  => (int) $dateTime->format('w'),
         ];
 
         $values = $this->parse();

@@ -36,7 +36,7 @@ class StepParser implements ParserInterface
 
         $values[] = (int) $value;
         while ($value + $step < $this->range->getEnd()) {
-            $value = $value + $step;
+            $value    = $value + $step;
             $values[] = (int) $value;
         }
 
