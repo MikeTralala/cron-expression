@@ -25,7 +25,7 @@ test:
         - php vendor/bin/php-cs-fixer fix --dry-run --config ./.php_cs.dist.php -vv
 
         - cp phpunit.xml.dist phpunit.xml
-        - vendor/bin/phpunit --coverage-text --colors=never --debug
+        - vendor/bin/phpunit --coverage-text --colors=never
     tags:
         - test
 
@@ -38,6 +38,7 @@ publish:
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
         - echo "$DEPLOYMENT_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+        - cat ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
         - git push git@github.com:MikeTralala/cron-expression.git $CI_COMMIT_REF_NAME
     tags:
