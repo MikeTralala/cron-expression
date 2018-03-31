@@ -25,13 +25,14 @@ class Expression
 
     /**
      * @return array
+     *
      * @throws \Exception
      */
     public function parse()
     {
         $chunks = preg_split('/\s/', $this->expression, -1, PREG_SPLIT_NO_EMPTY);
 
-        if (count($chunks) !== 5) {
+        if (5 !== count($chunks)) {
             throw new \Exception('todo');
         }
 
@@ -40,7 +41,7 @@ class Expression
         foreach ($chunks as $i => $chunk) {
             $parser = new Parser($this->getAllowedRange($i));
 
-            if (! $parser->satisfies($chunk)) {
+            if (!$parser->satisfies($chunk)) {
                 throw ExpressionException::createUnparsableChunkException($chunk);
             }
 
@@ -54,6 +55,7 @@ class Expression
      * @param int $position
      *
      * @return string
+     *
      * @throws ExpressionException
      */
     private function getNameForPosition($position)
@@ -78,6 +80,7 @@ class Expression
      * @param int $position
      *
      * @return Range
+     *
      * @throws ExpressionException
      */
     private function getAllowedRange($position)
@@ -114,17 +117,17 @@ class Expression
     public function isDue(\DateTime $dateTime)
     {
         $current = [
-            'minute'       => (int) $dateTime->format('i'),
-            'hour'         => (int) $dateTime->format('H'),
+            'minute' => (int) $dateTime->format('i'),
+            'hour' => (int) $dateTime->format('H'),
             'day_of_month' => (int) $dateTime->format('d'),
-            'month'        => (int) $dateTime->format('m'),
-            'day_of_week'  => (int) $dateTime->format('w'),
+            'month' => (int) $dateTime->format('m'),
+            'day_of_week' => (int) $dateTime->format('w'),
         ];
 
         $values = $this->parse();
 
         foreach ($current as $type => $value) {
-            if (! in_array($value, $values[$type])) {
+            if (!in_array($value, $values[$type])) {
                 return false;
             }
         }

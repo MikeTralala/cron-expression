@@ -28,7 +28,7 @@ class StepParser implements ParserInterface
 
         $values = [];
 
-        if ($start === self::WILDCARD) {
+        if (self::WILDCARD === $start) {
             $start = '0';
         }
 
@@ -36,7 +36,7 @@ class StepParser implements ParserInterface
 
         $values[] = (int) $value;
         while ($value + $step < $this->range->getEnd()) {
-            $value    = $value + $step;
+            $value = $value + $step;
             $values[] = (int) $value;
         }
 
@@ -48,14 +48,14 @@ class StepParser implements ParserInterface
      */
     public function satisfies($chunk)
     {
-        if (! preg_match("/^(\*|\d{1,2})\/\d{1,2}$/", $chunk)) {
+        if (!preg_match("/^(\*|\d{1,2})\/\d{1,2}$/", $chunk)) {
             return false;
         }
 
         $values = $this->parse($chunk);
 
         foreach ($values as $value) {
-            if (! $this->range->has($value)) {
+            if (!$this->range->has($value)) {
                 return false;
             }
         }

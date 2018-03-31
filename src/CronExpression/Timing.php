@@ -38,11 +38,11 @@ class Timing
      */
     private function __construct($minute = '*', $hour = '*', $dayOfMonth = '*', $month = '*', $dayOfWeek = '*')
     {
-        $this->minute     = $minute;
-        $this->hour       = $hour;
+        $this->minute = $minute;
+        $this->hour = $hour;
         $this->dayOfMonth = $dayOfMonth;
-        $this->month      = $month;
-        $this->dayOfWeek  = $dayOfWeek;
+        $this->month = $month;
+        $this->dayOfWeek = $dayOfWeek;
     }
 
     /**

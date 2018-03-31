@@ -26,7 +26,7 @@ class Range
     public function __construct($start, $end)
     {
         $this->start = $start;
-        $this->end   = $end;
+        $this->end = $end;
         $this->range = range($start, $end);
     }
 
