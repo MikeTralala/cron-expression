@@ -17,8 +17,8 @@ before_script:
     - php composer-setup.php
     - php -r "unlink('composer-setup.php'); unlink('installer.sig');"
 
-build:
-    stage: build
+test:
+    stage: test
     script:
         - php composer.phar install -o --dev
         - cp phpunit.xml.dist phpunit.xml
