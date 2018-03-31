@@ -29,6 +29,9 @@ test:
 
 publish:
     stage: publish
+    before_script:
+        - apt-get update -y
+        - apt-get install git -y
     script:
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
