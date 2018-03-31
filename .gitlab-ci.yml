@@ -38,8 +38,8 @@ publish:
         - mkdir -p ~/.ssh
         - chmod 700 ~/.ssh
         - echo "$DEPLOYMENT_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-        - cat ~/.ssh/id_rsa
         - chmod 600 ~/.ssh/id_rsa
+        - echo $CI_COMMIT_REF_NAME
         - git push git@github.com:MikeTralala/cron-expression.git $CI_COMMIT_REF_NAME
     tags:
         - publish
