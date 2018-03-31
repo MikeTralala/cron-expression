@@ -1,0 +1,134 @@
+<?php
+
+namespace Miketralala\CronExpression\Expression;
+
+use Miketralala\CronExpression\Exception\ExpressionException;
+use Miketralala\CronExpression\Expression\Parser\Parser;
+use Miketralala\CronExpression\Expression\Parser\Range;
+
+class Expression
+{
+    /**
+     * @var string
+     */
+    private $expression;
+
+    /**
+     * Expression constructor.
+     *
+     * @param string $expression
+     */
+    public function __construct($expression)
+    {
+        $this->expression = $expression;
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    public function parse()
+    {
+        $chunks = preg_split('/\s/', $this->expression, -1, PREG_SPLIT_NO_EMPTY);
+
+        if (count($chunks) !== 5) {
+            throw new \Exception('todo');
+        }
+
+        $values = [];
+
+        foreach ($chunks as $i => $chunk) {
+            $parser = new Parser($this->getAllowedRange($i));
+
+            if (! $parser->satisfies($chunk)) {
+                throw ExpressionException::createUnparsableChunkException($chunk);
+            }
+
+            $values[$this->getNameForPosition($i)] = $parser->parse($chunk);
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param int $position
+     *
+     * @return string
+     * @throws ExpressionException
+     */
+    private function getNameForPosition($position)
+    {
+        switch ($position) {
+            case 0:
+                return 'minute';
+            case 1:
+                return 'hour';
+            case 2:
+                return 'day_of_month';
+            case 3:
+                return 'month';
+            case 4:
+                return 'day_of_week';
+        }
+
+        throw ExpressionException::createInvalidPositionException($position);
+    }
+
+    /**
+     * @param int $position
+     *
+     * @return Range
+     * @throws ExpressionException
+     */
+    private function getAllowedRange($position)
+    {
+        switch ($position) {
+            case 0:
+                return new Range(0, 59);
+            case 1:
+                return new Range(0, 23);
+            case 2:
+                return new Range(1, 31);
+            case 3:
+                return new Range(1, 12);
+            case 4:
+                return new Range(0, 6);
+        }
+
+        throw ExpressionException::createInvalidPositionException($position);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->expression;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     *
+     * @return bool
+     */
+    public function isDue(\DateTime $dateTime)
+    {
+        $current = [
+            'minute'       => (int) $dateTime->format('i'),
+            'hour'         => (int) $dateTime->format('H'),
+            'day_of_month' => (int) $dateTime->format('d'),
+            'month'        => (int) $dateTime->format('m'),
+            'day_of_week'  => (int) $dateTime->format('w'),
+        ];
+
+        $values = $this->parse();
+
+        foreach ($current as $type => $value) {
+            if (! in_array($value, $values[$type])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
