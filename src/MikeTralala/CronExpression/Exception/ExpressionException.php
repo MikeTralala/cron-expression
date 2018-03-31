@@ -1,6 +1,6 @@
 <?php
 
-namespace Miketralala\CronExpression\Exception;
+namespace MikeTralala\CronExpression\Exception;
 
 class ExpressionException extends \RuntimeException
 {
@@ -22,5 +22,15 @@ class ExpressionException extends \RuntimeException
     public static function createUnparsableChunkException($chunk)
     {
         return new self(sprintf('The expression chunk "%s" is not parsable', $chunk));
+    }
+
+    /**
+     * @param array $chunks
+     *
+     * @return ExpressionException
+     */
+    public static function createInvalidChunksCountException(array $chunks)
+    {
+        return new self(sprintf('The expression should contain 5 chunks you provided %s chunks: "%s"', count($chunks), implode(', ', $chunks)));
     }
 }

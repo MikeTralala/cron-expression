@@ -1,6 +1,8 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression\Parser;
+namespace MikeTralala\CronExpression\Expression\Parser;
+
+use MikeTralala\CronExpression\Expression\Range;
 
 class MultiDigitParser implements ParserInterface
 {
@@ -32,7 +34,7 @@ class MultiDigitParser implements ParserInterface
         $values = [];
         foreach ($list as $item) {
             foreach ($parsers as $parser) {
-                if (!$parser->satisfies($item)) {
+                if (! $parser->satisfies($item)) {
                     continue;
                 }
 
@@ -59,7 +61,7 @@ class MultiDigitParser implements ParserInterface
         }
 
         foreach ($this->parse($chunk) as $part) {
-            if (!$this->range->has($part)) {
+            if (! $this->range->has($part)) {
                 return false;
             }
         }

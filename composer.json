@@ -1,24 +1,30 @@
 {
-    "name": "mike-tralala/cron-expression",
-    "description": "A library to use cron expressions in PHP",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
+    "name":              "mike-tralala/cron-expression",
+    "description":       "A library to use cron expressions in PHP",
+    "type":              "library",
+    "license":           "MIT",
+    "authors":           [
         {
-            "name": "Michael de Bie",
+            "name":  "Michael de Bie",
             "email": "miketralala@icloud.com"
         }
     ],
     "minimum-stability": "dev",
-    "require": {
+    "require":           {
         "php": ">=5.5.0"
     },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.12@dev"
+    "require-dev":       {
+        "friendsofphp/php-cs-fixer": "^2.12@dev",
+        "phpunit/phpunit":           "6.5.x-dev"
     },
-    "autoload": {
-        "psr-0": {
-            "Miketralala\\CronExpression": "src/"
+    "autoload":          {
+        "psr-4": {
+            "MikeTralala\\": "src/MikeTralala"
+        }
+    },
+    "autoload-dev":      {
+        "psr-4": {
+            "Tests\\MikeTralala\\": "tests/MikeTralala"
         }
     }
 }

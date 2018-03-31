@@ -1,6 +1,8 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression\Parser;
+namespace MikeTralala\CronExpression\Expression\Parser;
+
+use MikeTralala\CronExpression\Expression\Range;
 
 class RangeParser implements ParserInterface
 {
@@ -38,14 +40,14 @@ class RangeParser implements ParserInterface
      */
     public function satisfies($chunk)
     {
-        if (!preg_match("/^(\*|\d{1,2}-\d{1,2})$/", $chunk)) {
+        if (! preg_match("/^(\*|\d{1,2}-\d{1,2})$/", $chunk)) {
             return false;
         }
 
         $values = $this->parse($chunk);
 
         foreach ($values as $value) {
-            if (!$this->range->has($value)) {
+            if (! $this->range->has($value)) {
                 return false;
             }
         }

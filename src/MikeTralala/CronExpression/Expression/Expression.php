@@ -1,10 +1,9 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression;
+namespace MikeTralala\CronExpression\Expression;
 
-use Miketralala\CronExpression\Exception\ExpressionException;
-use Miketralala\CronExpression\Expression\Parser\Parser;
-use Miketralala\CronExpression\Expression\Parser\Range;
+use MikeTralala\CronExpression\Exception\ExpressionException;
+use MikeTralala\CronExpression\Expression\Parser\Parser;
 
 class Expression
 {
@@ -24,6 +23,14 @@ class Expression
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->expression;
+    }
+
+    /**
      * @return array
      *
      * @throws \Exception
@@ -33,7 +40,7 @@ class Expression
         $chunks = preg_split('/\s/', $this->expression, -1, PREG_SPLIT_NO_EMPTY);
 
         if (5 !== count($chunks)) {
-            throw new \Exception('todo');
+            throw ExpressionException::createInvalidChunksCountException($chunks);
         }
 
         $values = [];
@@ -41,7 +48,7 @@ class Expression
         foreach ($chunks as $i => $chunk) {
             $parser = new Parser($this->getAllowedRange($i));
 
-            if (!$parser->satisfies($chunk)) {
+            if (! $parser->satisfies($chunk)) {
                 throw ExpressionException::createUnparsableChunkException($chunk);
             }
 
@@ -49,6 +56,32 @@ class Expression
         }
 
         return $values;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     *
+     * @return bool
+     */
+    public function isDue(\DateTime $dateTime)
+    {
+        $current = [
+            'minute'       => (int) $dateTime->format('i'),
+            'hour'         => (int) $dateTime->format('H'),
+            'day_of_month' => (int) $dateTime->format('d'),
+            'month'        => (int) $dateTime->format('m'),
+            'day_of_week'  => (int) $dateTime->format('w'),
+        ];
+
+        $values = $this->parse();
+
+        foreach ($current as $type => $value) {
+            if (! in_array($value, $values[$type])) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -101,37 +134,4 @@ class Expression
         throw ExpressionException::createInvalidPositionException($position);
     }
 
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->expression;
-    }
-
-    /**
-     * @param \DateTime $dateTime
-     *
-     * @return bool
-     */
-    public function isDue(\DateTime $dateTime)
-    {
-        $current = [
-            'minute'       => (int) $dateTime->format('i'),
-            'hour'         => (int) $dateTime->format('H'),
-            'day_of_month' => (int) $dateTime->format('d'),
-            'month'        => (int) $dateTime->format('m'),
-            'day_of_week'  => (int) $dateTime->format('w'),
-        ];
-
-        $values = $this->parse();
-
-        foreach ($current as $type => $value) {
-            if (!in_array($value, $values[$type])) {
-                return false;
-            }
-        }
-
-        return true;
-    }
 }

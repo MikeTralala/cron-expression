@@ -1,6 +1,8 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression\Parser;
+namespace MikeTralala\CronExpression\Expression\Parser;
+
+use MikeTralala\CronExpression\Expression\Range;
 
 interface ParserInterface
 {

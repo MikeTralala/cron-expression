@@ -1,8 +1,8 @@
 <?php
 
-namespace Miketralala\CronExpression;
+namespace MikeTralala\CronExpression;
 
-use Miketralala\CronExpression\Expression\Expression;
+use MikeTralala\CronExpression\Expression\Expression;
 
 class Timing
 {

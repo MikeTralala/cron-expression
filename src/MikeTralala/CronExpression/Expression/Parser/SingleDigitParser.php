@@ -1,6 +1,8 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression\Parser;
+namespace MikeTralala\CronExpression\Expression\Parser;
+
+use MikeTralala\CronExpression\Expression\Range;
 
 class SingleDigitParser implements ParserInterface
 {
@@ -30,6 +32,6 @@ class SingleDigitParser implements ParserInterface
      */
     public function satisfies($chunk)
     {
-        return preg_match("/^\d{1,2}$/", $chunk) && $this->range->has($chunk);
+        return preg_match("/^\d{1,2}$/", $chunk) && $this->range->has((int) $chunk);
     }
 }

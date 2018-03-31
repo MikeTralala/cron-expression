@@ -1,6 +1,6 @@
 <?php
 
-namespace Miketralala\CronExpression\Expression\Parser;
+namespace MikeTralala\CronExpression\Expression;
 
 class Range
 {
@@ -8,10 +8,12 @@ class Range
      * @var int
      */
     private $start;
+
     /**
      * @var int
      */
     private $end;
+
     /**
      * @var array
      */
