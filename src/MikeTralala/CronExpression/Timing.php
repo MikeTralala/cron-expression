@@ -46,6 +46,14 @@ class Timing
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getExpression();
+    }
+
+    /**
      * @param string $minute
      * @param string $hour
      * @param string $dayOfMonth
@@ -96,8 +104,12 @@ class Timing
      *
      * @return bool
      */
-    public function isDue(\DateTime $dateTime)
+    public function isDue(\DateTime $dateTime = null)
     {
+        if (null === $dateTime) {
+            $dateTime = new \DateTime();
+        }
+
         $expression = $this->getExpression();
 
         return $expression->isDue($dateTime);

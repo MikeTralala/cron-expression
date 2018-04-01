@@ -14,13 +14,14 @@ class TimingTest extends TestCase
     /**
      * @covers ::create
      * @covers ::__construct
+     * @covers ::__toString
      */
     public function test_create()
     {
         $timing = Timing::create();
 
         $this->assertInstanceOf(Timing::class, $timing);
-        $this->assertEquals('* * * * *', $timing->getExpression());
+        $this->assertEquals('* * * * *', $timing);
     }
 
     /**
@@ -80,5 +81,6 @@ class TimingTest extends TestCase
 
         $this->assertEquals('* * * * *', $timing->getExpression());
         $this->assertTrue($timing->isDue(new \DateTime()));
+        $this->assertTrue($timing->isDue());
     }
 }

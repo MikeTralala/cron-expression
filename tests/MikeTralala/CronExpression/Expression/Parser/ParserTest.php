@@ -28,6 +28,7 @@ class ParserTest extends TestCase
     {
         $parser = new Parser(new Range(0, 59));
 
+        $this->assertEquals([0, 15, 30, 45], $parser->parse('0-45/15'));
         $this->assertEquals(range(0, 59), $parser->parse('*'));
         $this->assertEquals(range(10, 15), $parser->parse('10-15'));
         $this->assertEquals(range(1, 5), $parser->parse('1,2,3,4,5'));

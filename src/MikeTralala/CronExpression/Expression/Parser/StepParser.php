@@ -31,7 +31,7 @@ class StepParser implements ParserInterface
         $values = [];
 
         if (self::WILDCARD === $start) {
-            $start = '0';
+            $start = $this->range->getStart();
         }
 
         $value = $start;

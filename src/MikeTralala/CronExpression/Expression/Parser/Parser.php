@@ -24,6 +24,7 @@ class Parser implements ParserInterface
         $this->range = $range;
 
         $this->childParsers = [
+            new RangeStepParser($range),
             new MultiDigitParser($range),
             new RangeParser($range),
             new StepParser($range),
