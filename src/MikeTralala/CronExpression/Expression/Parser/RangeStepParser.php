@@ -12,9 +12,7 @@ class RangeStepParser implements ParserInterface
     private $range;
 
     /**
-     * ParserInterface constructor.
-     *
-     * @param Range $range
+     * {@inheritdoc}
      */
     public function __construct(Range $range)
     {
@@ -22,9 +20,7 @@ class RangeStepParser implements ParserInterface
     }
 
     /**
-     * @param string $chunk
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function parse($chunk)
     {
@@ -44,11 +40,7 @@ class RangeStepParser implements ParserInterface
     }
 
     /**
-     *
-     *
-     * @param string $chunk
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function satisfies($chunk)
     {

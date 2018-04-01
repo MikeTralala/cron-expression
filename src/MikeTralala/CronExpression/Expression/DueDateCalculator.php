@@ -22,7 +22,6 @@ class DueDateCalculator
         $this->maxIterations = $maxIterations;
     }
 
-
     /**
      * @param string         $type
      * @param Expression     $expression
@@ -65,6 +64,7 @@ class DueDateCalculator
      * @param array     $parsed
      *
      * @return \DateTime
+     *
      * @throws \InvalidArgumentException
      */
     private function getPossibleDueDate($type, \DateTime $dateTime, array $parsed)

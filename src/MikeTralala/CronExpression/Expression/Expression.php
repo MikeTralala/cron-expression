@@ -7,6 +7,14 @@ use MikeTralala\CronExpression\Expression\Parser\Parser;
 
 class Expression
 {
+    const YEARLY   = '0 0 1 1 *';
+    const ANNUALLY = '0 0 1 1 *';
+    const MONTHLY  = '0 0 1 * *';
+    const WEEKLY   = '0 0 * * 0';
+    const DAILY    = '0 0 * * *';
+    const HOURLY   = '0 * * * *';
+    const MINUTELY = '* * * * *';
+
     /**
      * @var string
      */
