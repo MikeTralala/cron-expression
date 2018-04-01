@@ -59,6 +59,30 @@ class DueDateCalculator
     }
 
     /**
+     * @param Expression     $expression
+     * @param int            $limit
+     * @param \DateTime|null $fromDateTime
+     *
+     * @return array|\DateTime[]
+     */
+    public function getNextDueDates(Expression $expression, $limit = 1, \DateTime $fromDateTime = null)
+    {
+        return $this->getDueDates(self::TYPE_FUTURE, $expression, $limit, $fromDateTime);
+    }
+
+    /**
+     * @param Expression     $expression
+     * @param int            $limit
+     * @param \DateTime|null $fromDateTime
+     *
+     * @return array|\DateTime[]
+     */
+    public function getPreviousDueDates(Expression $expression, $limit = 1, \DateTime $fromDateTime = null)
+    {
+        return $this->getDueDates(self::TYPE_PAST, $expression, $limit, $fromDateTime);
+    }
+
+    /**
      * @param string    $type
      * @param \DateTime $dateTime
      * @param array     $parsed
@@ -87,4 +111,5 @@ class DueDateCalculator
 
         return $dateTime;
     }
+
 }

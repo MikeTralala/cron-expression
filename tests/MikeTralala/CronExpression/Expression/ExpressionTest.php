@@ -79,6 +79,7 @@ class ExpressionTest extends TestCase
 
         $this->assertEquals('* * * * *', $expression);
         $this->assertTrue($expression->isDue(new \DateTime()));
+        $this->assertTrue($expression->isDue());
 
         $expression = new Expression('10 * * * *');
 

@@ -31,6 +31,30 @@ class DueDateCalculatorTest extends TestCase
     }
 
     /**
+     * @covers ::getNextDueDates
+     */
+    public function test_get_next_due_dates()
+    {
+        $calculator = new DueDateCalculator();
+
+        $dueDates = $calculator->getNextDueDates(new Expression('* * * * *'), 5);
+        $this->assertTrue(is_array($dueDates));
+        $this->assertCount(5, $dueDates);
+    }
+
+    /**
+     * @covers ::getPreviousDueDates
+     */
+    public function test_get_previous_due_dates()
+    {
+        $calculator = new DueDateCalculator();
+
+        $dueDates = $calculator->getPreviousDueDates(new Expression('* * * * *'), 5);
+        $this->assertTrue(is_array($dueDates));
+        $this->assertCount(5, $dueDates);
+    }
+
+    /**
      * @coversNothing
      */
     public function test_multiple_expressions()

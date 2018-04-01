@@ -67,12 +67,16 @@ class Expression
     }
 
     /**
-     * @param \DateTime $dateTime
+     * @param \DateTime|null $dateTime
      *
      * @return bool
      */
-    public function isDue(\DateTime $dateTime)
+    public function isDue(\DateTime $dateTime = null)
     {
+        if (null === $dateTime) {
+            $dateTime = new \DateTime();
+        }
+
         $current = [
             'minute'       => (int) $dateTime->format('i'),
             'hour'         => (int) $dateTime->format('H'),
