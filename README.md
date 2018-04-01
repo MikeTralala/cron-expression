@@ -37,7 +37,7 @@ $expression = new Expression(Expression::MINUTELY);
 $expression->isDue();
 
 // Works with complex definitions
-$expression = new Expression('3-59/15 0 */15 1 2-5');
+$expression = new Expression('10-40/10 0 */5 1 4,5');
 $expression->isDue();
 
 // Calculating next running date
