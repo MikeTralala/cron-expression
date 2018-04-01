@@ -111,5 +111,4 @@ class DueDateCalculator
 
         return $dateTime;
     }
-
 }
